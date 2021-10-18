@@ -38,7 +38,7 @@ namespace Domain.Entities.Metodos
             {
                 ProductoEspecifico = new Producto[1];
                 ProductoEspecifico[0] = t;
-                PrecioVenta(t);
+                PrecioVenta(t.Precio);
                 CostoDelTotal = t.Precio * t.Existencia;
                 CostoDelTotal = CostoDeCompra;
                 return;
@@ -47,7 +47,7 @@ namespace Domain.Entities.Metodos
             Array.Copy(ProductoEspecifico, Tmp, ProductoEspecifico.Length);
             Tmp[Tmp.Length - 1] = t;
             ProductoEspecifico = Tmp;
-            PrecioVenta(t);
+            PrecioVenta(t.Precio);
             CostoDelTotal += t.Precio * t.Existencia;
             CostoDeCompra = t.Precio * t.Existencia;
             Ordenar();
@@ -92,9 +92,11 @@ namespace Domain.Entities.Metodos
 
         public void Vender(int i)
         {
+            decimal venta = ValorPrecioVenta();
+            PrecioVenta(venta);
             for (int j = 0; j < i; j++)
             {
-                CostoDeVenta += ProductoEspecifico[j].Existencia * ValorPrecioVenta();
+                CostoDeVenta += ProductoEspecifico[j].Existencia * venta;
                 CostoDelTotal = CostoDelTotal - (ProductoEspecifico[j].Existencia * ProductoEspecifico[i].Precio);
             }
             while (i != 0)
@@ -103,17 +105,17 @@ namespace Domain.Entities.Metodos
                 i--;
             }
         }
-        public void PrecioVenta(Producto t)
+        public void PrecioVenta(decimal t)
         {
             if (PrecioDeVenta == null)
             {
                 PrecioDeVenta = new decimal[1];
-                PrecioDeVenta[0] = t.Precio;
+                PrecioDeVenta[0] = t;
                 return;
             }
             decimal[] Tmp = new decimal[PrecioDeVenta.Length + 1];
             Array.Copy(PrecioDeVenta, Tmp, PrecioDeVenta.Length);
-            Tmp[Tmp.Length - 1] = t.Precio;
+            Tmp[Tmp.Length - 1] = t;
             PrecioDeVenta = Tmp;
         }
         public decimal ValorPrecioVenta()
