@@ -8,6 +8,7 @@ namespace Domain.Interfaces
 	public interface IMetodos: ImodelMetodos<Producto>
 	{
 		decimal CostoCompra();
+		decimal CostoTotal();
 		decimal CostoVenta();
 
 		void Ordenar();

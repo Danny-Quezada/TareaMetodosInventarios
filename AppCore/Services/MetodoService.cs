@@ -27,7 +27,12 @@ namespace AppCore.Services
 			return Model.CostoCompra();
 		}
 
-		public decimal CostoVenta()
+        public decimal CostoTotal()
+        {
+			return Model.CostoTotal();
+        }
+
+        public decimal CostoVenta()
 		{
 			return Model.CostoVenta();
 		}

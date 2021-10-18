@@ -5,15 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Processses\Inventories\**" />
+    <EmbeddedResource Remove="Processses\Inventories\**" />
+    <None Remove="Processses\Inventories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="6.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Processses\Inventories\" />
   </ItemGroup>
 
 </Project>

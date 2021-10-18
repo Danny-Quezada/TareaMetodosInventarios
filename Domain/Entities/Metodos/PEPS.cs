@@ -29,6 +29,7 @@ namespace Domain.Entities.Metodos
 		Producto[] ProductoEspecifico;
 		private decimal CostoDeCompra;
 		private decimal CostoDeVenta;
+		private decimal CompraIndividual;
 		public void Comprar(Producto t)
 		{
 
@@ -44,12 +45,13 @@ namespace Domain.Entities.Metodos
 			Tmp[Tmp.Length - 1] = t;
 			ProductoEspecifico = Tmp;
 			CostoDeCompra += t.Precio * t.Existencia;
+			CompraIndividual = t.Precio * t.Existencia;
 			Ordenar();
 		}
 
 		public decimal CostoCompra()
 		{
-			return CostoDeCompra;
+			return CompraIndividual;
 		}
 
 		public decimal CostoVenta()
@@ -131,6 +133,11 @@ namespace Domain.Entities.Metodos
 			Eliminar();
 		}
 
-		
-	}
+        public decimal CostoTotal()
+        {
+			CostoDeCompra = CostoDeCompra - CostoDeVenta;
+			CostoDeVenta = 0;
+			return CostoDeCompra;
+		}
+    }
 }

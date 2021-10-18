@@ -7,6 +7,7 @@ namespace AppCore.Interfaces
 {
 	public interface IMetodoServices: IServicesModel<Producto>
 	{
+		decimal CostoTotal();
 		decimal CostoCompra();
 		decimal CostoVenta();
 

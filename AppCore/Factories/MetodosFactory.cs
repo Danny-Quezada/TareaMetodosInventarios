@@ -28,6 +28,10 @@ namespace AppCore.Factories
 			{
 				return new PromedioPonderado();
 			}
+			else if (metodo == "Simple")
+            {
+				return new MetodoSimple();
+			}
 			else
 			{
 				 throw new Exception(nameof(metodo));

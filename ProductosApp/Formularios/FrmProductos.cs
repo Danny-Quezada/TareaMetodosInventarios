@@ -104,8 +104,9 @@ namespace ProductosApp.Formularios
             }
             else if (cmbMetodos.SelectedIndex == 2)
 			{
-
-			}
+                FrmMetodos Metodo = new FrmMetodos(productoService.GetProductoById(int.Parse(txtIDProducto.Text)), new MetodoService(MetodosFactory.CreateInstace("Simple")));
+                Metodo.ShowDialog();
+            }
             else if (cmbMetodos.SelectedIndex == 3)
 			{
                 FrmMetodos Metodo = new FrmMetodos(productoService.GetProductoById(int.Parse(txtIDProducto.Text)), new MetodoService(MetodosFactory.CreateInstace("Ponderado")));

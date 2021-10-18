@@ -17,7 +17,7 @@ namespace Domain.Entities
         public DateTime FechaCompra { get; set; }
        public String  TooString()
 		{
-            return $"Nombre: {Nombre}, Precio: {Precio}, Fecha de Comprar: {FechaCompra}, Existencia {Existencia}, Costo de la compra: {Precio*Existencia}{Environment.NewLine}";
+            return $" Fecha de Comprar: {FechaCompra}, Producto: {Nombre}, Precio: {Precio}, Existencia {Existencia}, Costo de la compra: {Precio*Existencia}";
 		}
         public class ProductoOrderByPrecio : IComparer<Producto>
         {

@@ -31,6 +31,7 @@ namespace Domain.Entities.Metodos
 		private decimal CostoDeVenta;
 		private decimal CostoPromedio;
 		private decimal numeroDeUnidades;
+		private decimal CompraIndividual;
 
 		public void Comprar(Producto t)
 		{
@@ -52,6 +53,7 @@ namespace Domain.Entities.Metodos
 			decimal Promedio = CostoPromedio / numeroDeUnidades;
 			CostoPromedio = Promedio;
 			CostoDeCompra += t.Precio * t.Existencia;
+			CompraIndividual = t.Precio * t.Existencia;
 			Ordenar();
 
 		}
@@ -61,7 +63,7 @@ namespace Domain.Entities.Metodos
 		}
 		public decimal CostoCompra()
 		{
-			return CostoDeCompra;
+			return CompraIndividual;
 		}
 
 		public decimal CostoVenta()
@@ -132,8 +134,27 @@ namespace Domain.Entities.Metodos
 
 			}
 			Eliminar();
+		 }
+
+        public decimal CostoTotal(int i)
+        {
+			decimal costo = 0;
+			for (int a = 0; a < i; a++)
+			{
+				if (ProductoEspecifico[a].Existencia != 0)
+				{
+					costo += ProductoEspecifico[a].Existencia * ProductoEspecifico[a].Precio;
+				}
+
+			}
+			return costo;
 		}
 
-	
-	}
+        public decimal CostoTotal()
+        {
+			CostoDeCompra = CostoDeCompra - CostoDeVenta;
+			CostoDeVenta = 0;
+			return CostoDeCompra;
+		}
+    }
 }

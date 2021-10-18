@@ -16,8 +16,10 @@ namespace ProductosApp.Formularios
 	public partial class FrmMetodos : Form
 	{
 		
-		 Producto Requerido;
+		Producto Requerido;
 		MetodoService Model;
+		private int indiceCompra = 1;
+		private int indiceVenta = 1;
 		public FrmMetodos(Producto requerido,MetodoService model)
 		{
 
@@ -31,7 +33,8 @@ namespace ProductosApp.Formularios
 		private void FrmMetodos_Load(object sender, EventArgs e)
 		{
 
-			rtbProductos.Text = Requerido.TooString();
+			rtbProductos.Text = $"(Compra {indiceCompra}) " + Requerido.TooString() + $"{Environment.NewLine}";
+			indiceCompra++;
 		}
 
 		private void btnEnviar_Click(object sender, EventArgs e)
@@ -57,8 +60,9 @@ namespace ProductosApp.Formularios
 			txtPrecio.Text = String.Empty;
 			txtUnidad.Text = String.Empty;
 			Model.Comprar(Productoo);
-			rtbProductos.Text += Productoo.TooString();
-			rtbProductos.Text += $"Costo de la compras: {Model.CostoCompra()}{Environment.NewLine}";
+			rtbProductos.Text += $"(Compra {indiceCompra}) " + Productoo.TooString();
+			rtbProductos.Text += $", Costo Total: {Model.CostoTotal()}{Environment.NewLine}";
+			indiceCompra++;
 		}
 
 		private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
@@ -119,11 +123,11 @@ namespace ProductosApp.Formularios
 			else
 			{
 				Model.Vender(int.Parse(txtLotes.Text));
-				rtbProductos.Text += $"Costo de la venta: {Model.CostoVenta()}{Environment.NewLine}";
+				rtbProductos.Text += $"(Venta {indiceVenta})  Costo de la venta: {Model.CostoVenta()}, Costo total: {Model.CostoTotal()}{Environment.NewLine}";
 				lblLotes.Text = $"Tienes {Model.Largo()} lotes";
-				
+				indiceVenta++;
 			}
-		}
+		 }
 
 		private void txtLotes_TextChanged(object sender, EventArgs e)
 		{
